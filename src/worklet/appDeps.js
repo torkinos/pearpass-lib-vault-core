@@ -485,6 +485,10 @@ export const activeVaultGet = async (key) => {
 
   const res = await activeVaultInstance.get(key)
 
+  if (!res || !res.value) {
+    return null
+  }
+
   const { value, file } = res || {}
   const parsedValue = JSON.parse(value)
 
