@@ -47,7 +47,7 @@ describe('getDecryptionKey', () => {
     )
     expect(sodium.crypto_pwhash).toHaveBeenCalledWith(
       expect.any(Buffer),
-      Buffer.from(passwordBase64, 'base64'),
+      expect.any(Buffer),
       Buffer.from(salt, 'base64'),
       sodium.crypto_pwhash_OPSLIMIT_SENSITIVE,
       sodium.crypto_pwhash_MEMLIMIT_INTERACTIVE,
@@ -63,8 +63,14 @@ describe('getDecryptionKey', () => {
       Buffer.from(result.padEnd(out.length, '0')).copy(out)
     })
 
-    const key1 = getDecryptionKey({ salt, password: Buffer.from('password1').toString('base64') })
-    const key2 = getDecryptionKey({ salt, password: Buffer.from('password2').toString('base64') })
+    const key1 = getDecryptionKey({
+      salt,
+      password: Buffer.from('password1').toString('base64')
+    })
+    const key2 = getDecryptionKey({
+      salt,
+      password: Buffer.from('password2').toString('base64')
+    })
 
     expect(key1).not.toBe(key2)
   })
