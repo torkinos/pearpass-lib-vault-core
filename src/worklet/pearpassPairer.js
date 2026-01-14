@@ -63,20 +63,16 @@ export class PearPassPairer {
       this.pair = null
       this.store = null
 
-      if (pair) {
-        try {
-          await pair.close()
-        } catch {
-          // Ignore close errors
-        }
+      try {
+        await pair?.close()
+      } catch {
+        // Ignore close errors
       }
 
-      if (store) {
-        try {
-          await store.close()
-        } catch {
-          // Ignore close errors
-        }
+      try {
+        await store?.close()
+      } catch {
+        // Ignore close errors
       }
     })
 
